@@ -50,6 +50,13 @@ rduphelper([X|L],[X|M],T) :- not(member(X,T)),rduphelper(L,M,[X|T]).
 rduphelper([X|L],[Y|M],T) :- member(X,T),rduphelper(L,[Y|M],T).
 rduphelper([X|L],[   ],T) :- member(X,T),rduphelper(L,[],T).
 
+%- b
+
+flat(L,F) :- flathelper(L,[],F).
+flathelper([],F,F).
+flathelper([X|L],Y,F) :- flathelper(X,Z,F),flathelper(L,Y,Z).
+flathelper(X,F,[X|F]) :- not(is_list(X)).
+
 %- c
 
 project(L,M,N) :- projecthelper(L,M,N,1).
